@@ -2,8 +2,6 @@
 set -e
 
 BUILD_HOME_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-IMAGE="srrs-ooph"
-REGISTRY="${REGISTRY:-srrs-registry.notprod.homeoffice.gov.uk}"
 
 mkdir -p ${PWD}/tmp
 
@@ -16,7 +14,7 @@ if docker run -i --rm=true \
   -e "ARTIFACTORY_USERNAME=${ARTIFACTORY_USERNAME}" \
   -e "ARTIFACTORY_PASSWORD=${ARTIFACTORY_PASSWORD}" \
   quay.io/ukhomeofficedigital/scala-play:v0.1.4 \
-  /code/build.sh $@ ; then
+  /code/build.sh publish ; then
 
 
     ok=0
