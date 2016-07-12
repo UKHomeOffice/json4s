@@ -16,7 +16,8 @@ if docker run -i --rm=true \
   -e "ARTIFACTORY_USERNAME=${ARTIFACTORY_USERNAME}" \
   -e "ARTIFACTORY_PASSWORD=${ARTIFACTORY_PASSWORD}" \
   quay.io/ukhomeofficedigital/scala-play:v0.1.4 \
-  /code/build.sh $@ publish ; then
+  /code/build.sh $@ ; then
+
 
     ok=0
 else
