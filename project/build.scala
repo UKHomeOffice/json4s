@@ -59,13 +59,15 @@ object build extends Build {
     javacOptions ++= Seq("-target", "1.6", "-source", "1.6"),
     javaVersionPrefix in javaVersionCheck := Some{
       CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, scalaMajor)) if scalaMajor <= 11 => "1.7"
+        case Some((2, scalaMajor)) if scalaMajor <= 11 => "1.8"
         case _ => "1.8"
       }
     },
     manifestSetting,
     resolvers ++= Seq(Opts.resolver.sonatypeSnapshots, Opts.resolver.sonatypeReleases),
-    crossVersion := CrossVersion.binary
+    crossVersion := CrossVersion.binary,
+    credentials += Credentials("Artifactory Realm", "artifactory.digital.homeoffice.gov.uk", System.getenv("ARTIFACTORY_USERNAME"), System.getenv("ARTIFACTORY_PASSWORD")),
+    publishTo := Some("Artifactory Realm" at "https://artifactory.digital.homeoffice.gov.uk/artifactory/libs-snapshot-local;build.timestamp=" + new java.util.Date().getTime)
   ) ++ mimaSettings
 
   val noPublish = Seq(
